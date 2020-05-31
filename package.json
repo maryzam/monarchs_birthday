@@ -1,0 +1,43 @@
+{
+  "name": "monarchs_birthday",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "keywords": [
+    "d3",
+    "data visualisation",
+    "Queen's Bithday Celebration",
+    "British monarchs",
+    "history"
+  ],
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maryzam/monarchs_birthday.git"
+  },
+  "author": {
+    "name": "Mary Zam",
+    "url": "https://github.com/maryzam"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maryzam/monarchs_birthday/issues"
+  },
+  "homepage": "https://github.com/maryzam/monarchs_birthday#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.10.1",
+    "d3": "^5.16.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.5.3",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
