@@ -44,7 +44,10 @@ class QueensBirthdayViz {
 		monarchs
 			.append('line')
 				.attr('class', 'tooltip')
-				.attr('y1', (info) => ((info.label + 1) * this.size.imgDim - this.size.height));
+				.attr('y1', (info) => {
+					const offset = (info.label + 1) * this.size.imgDim -  this.size.height;
+					return offset + ((offset > 0) ? 0 : 25);
+				});
 
 		monarchs
 			.append('svg:image')
