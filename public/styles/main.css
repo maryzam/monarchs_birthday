@@ -14,7 +14,8 @@ html, body {
 h1, h2, h3, h4 {
 	font-family: 'Abril Fatface', cursive;
 	text-align: center; 
-	color: #323c50
+	color: #323c50;
+	padding-bottom: 1em;
 }
 
 main {
@@ -43,16 +44,46 @@ main {
 	stroke: #323c50
 }
 
+.tooltip {
+	stroke: #323c50;
+	stroke-width: 0.5px;
+}
+
 .monarch {
-	stroke-width: 10px;
-	stroke-opacity: 0.1;
 	fill-opacity: 0.3;
+	stroke-width: 0.5px;
+	stroke-opacity: 0.7;
+	opacity: 0.7;
 }
 
 .monarch .queen {
 	fill: #E88A8A;
+	stroke: #E88A8A;
 }
 
 .monarch .king {
 	fill: #D3AC2B;
+	stroke: #D3AC2B;
+}
+
+.monarch .name {
+	font-family: 'Abril Fatface', cursive;
+	font-size: 0.7em;
+	fill: #323c50;
+	fill-opacity: 1;
+	text-anchor: middle;
+	alignment-baseline: middle;
+
+}
+
+.monarch .note {
+	font-size: 0.5em;
+	fill-opacity: 1;
+	text-anchor: middle;
+	alignment-baseline: middle;
+}
+
+.monarch:hover {
+	fill-opacity: 0.5;
+	opacity: 1;
 }

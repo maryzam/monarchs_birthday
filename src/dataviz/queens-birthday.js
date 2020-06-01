@@ -1,5 +1,7 @@
 import * as d3 from 'd3';
 
+const formatDate = d3.timeFormat("%B %d, %Y")
+
 class QueensBirthdayViz {
 
 	constructor(selector) {
@@ -8,8 +10,15 @@ class QueensBirthdayViz {
 		const containerSize = container.node().getBoundingClientRect();
 
 		this._prepareContainer(container, containerSize);
-
 		this._setupScales(containerSize);
+
+		const topHeight = Math.floor(containerSize.height / 2);
+
+		this.size = {
+			height: topHeight,
+			wigth: containerSize.width,
+			imgDim: Math.min(150, Math.floor(topHeight / 3))
+		}
 	};
 
 	drawMonarchBirthdays(source) {
@@ -34,8 +43,30 @@ class QueensBirthdayViz {
 
 		monarchs
 			.append('line')
-				.attr('class', 'axis')
-				.attr('y1', 10);
+				.attr('class', 'tooltip')
+				.attr('y1', (info) => ((info.label + 1) * this.size.imgDim - this.size.height));
+
+		monarchs
+			.append('svg:image')
+				.attr('xlink:href', (info) => `/assets/images/${ info.name.replace(' ', '_') }_sq.png`)
+				.attr('width', this.size.imgDim)
+				.attr('height', this.size.imgDim)
+				.attr('x', -(this.size.imgDim / 2))
+				.attr('y', (info) => (info.label * this.size.imgDim -this.size.height));
+
+		monarchs
+			.append('text')
+				.text((info) => info.name)
+				.attr('class', 'name')
+				.attr('y', (info) => ((info.label + 1)  * this.size.imgDim - this.size.height))
+				.attr('dy', '1em');
+
+		monarchs
+			.append('text')
+				.text((info) => formatDate(info.born))
+				.attr('class', 'note')
+				.attr('y', (info) => ((info.label + 1)*  this.size.imgDim - this.size.height))
+				.attr('dy', '2.5em');
 	}
 
 	drawCelebrationDates(source) {
@@ -43,25 +74,19 @@ class QueensBirthdayViz {
 	}
 
 	markAvgMonarchBithday(source) {
+
 		const sumOfBithdays = source.reduce((days, info) => (days + (info.birthday * info.celebrations)), 0);
 		const celebrationsTotal = source.reduce((total, info) => (total + info.celebrations), 0);
 		const avgBirthday = Math.round(sumOfBithdays / celebrationsTotal);
 
-		this.container
+		/*this.container
 			.selectAll('.avg-birthday')
 			.data([avgBirthday])
 				.enter()
 			.append('circle')
 				.attr('cx', (day) => this.scales.dayOfYear(day))
 				.attr("r", 3)
-				.style("fill", "red");
-
-		const statistic = new Date();
-		statistic.setMonth(0);
-		statistic.setDate(avgBirthday);
-		console.log('birthday');
-		console.log(statistic);	
-		console.log(avgBirthday);	
+				.style("fill", "red"); */
 	};
 
 	_setupScales(containerSize) {

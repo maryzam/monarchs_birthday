@@ -28,7 +28,8 @@ const parseMonarchsData = (source) => {
 			born: birthdayDate,
 			birthday: getDayOfYear(birthdayDate),
 			celebrations: +info.Celebrates,
-			title: info.Title
+			title: info.Title,
+			label: +info.Label
 		});
 	});
 };
