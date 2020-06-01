@@ -8,14 +8,15 @@ module.exports = {
     },
     output: {
         filename: "[name].js",
-        path: path.join(__dirname, "./libs")
+        path: path.join(__dirname, "./public/libs")
     },
     resolve: {
         extensions: [".js", ".jsx", ".json"]
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: ".",
+        contentBase: "./public",
+        index: "index.html",
         host: "localhost",
         port: 9000
     },
@@ -27,7 +28,8 @@ module.exports = {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              presets: ['@babel/preset-env'],
+              plugins: ["@babel/plugin-proposal-class-properties"]
             }
           }
         },
