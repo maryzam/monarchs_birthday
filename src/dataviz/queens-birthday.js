@@ -73,23 +73,37 @@ class QueensBirthdayViz {
 	}
 
 	drawCelebrationDates(source) {
-		console.log('drawCelebrationDates');
+		source.sort((one, two) => (one.dayOfYear - two.dayOfYear));
+
+		const countries = this.container
+								.selectAll('g.country')
+								.data(source)
+									.enter()
+								.append('g')
+									.attr('class', 'country')
+									.attr("transform", (info) => `translate(${ this.scales.dayOfYear(info.dayOfYear) }, 0)`);
+		countries
+			.append('svg:image')
+				.attr('xlink:href', (info) => `/assets/images/flags/${ info.code }.png`)
+				.attr('width', 12)
+				.attr('height', 12)
+				.attr('x', -6)
+				.attr('y', -6);
 	}
 
 	markAvgMonarchBithday(source) {
 
 		const sumOfBithdays = source.reduce((days, info) => (days + (info.birthday * info.celebrations)), 0);
 		const celebrationsTotal = source.reduce((total, info) => (total + info.celebrations), 0);
-		const avgBirthday = Math.round(sumOfBithdays / celebrationsTotal);
+		const avgBirthday = Math.ceil(sumOfBithdays / celebrationsTotal);
 
-		/*this.container
+		this.container
 			.selectAll('.avg-birthday')
 			.data([avgBirthday])
 				.enter()
-			.append('circle')
-				.attr('cx', (day) => this.scales.dayOfYear(day))
-				.attr("r", 3)
-				.style("fill", "red"); */
+			.append('g')
+				.attr('class', 'avg-birthday')
+				.attr('transform', (day) => `translate($ {this.scales.dayOfYear(day)}, 0)`);
 	};
 
 	_setupScales(containerSize) {

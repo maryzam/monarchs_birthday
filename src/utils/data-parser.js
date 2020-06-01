@@ -13,7 +13,6 @@ const getDayOfYear = (date) => {
 };
 
 const parseMonarchsData = (source) => {
-	console.log(source);
 	if (!source || !source.length) {
 		return [];
 	}
@@ -34,6 +33,24 @@ const parseMonarchsData = (source) => {
 	});
 };
 
+const parseCelebrationsData = (source) => {
+	if (!source || !source.length) {
+		return [];
+	}
+	
+	return source.map((info) => {
+		const celebrationDate = toDate(info.date);
+		console.log(info.Name)
+		return ({
+			country: info.country,
+			code: info.code,
+			date: celebrationDate,
+			dayOfYear: getDayOfYear(celebrationDate)
+		});
+	});
+};
+
 export {
-	parseMonarchsData
+	parseMonarchsData,
+	parseCelebrationsData
 };
