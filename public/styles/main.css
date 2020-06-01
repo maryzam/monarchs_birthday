@@ -15,7 +15,6 @@ h1, h2, h3, h4 {
 	font-family: 'Abril Fatface', cursive;
 	text-align: center; 
 	color: #323c50;
-	padding-bottom: 1em;
 }
 
 main {
@@ -37,6 +36,9 @@ main {
 
 .columns .item {
 	flex-grow: 1;
+	padding-right: 1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 .axis {
