@@ -13,21 +13,29 @@ class QueensBirthdayViz {
 	};
 
 	drawMonarchBirthdays(source) {
+
 		const celebrationsRange = d3.extent(source, source => source.celebrations);
 		this.scales.celebrations.domain(celebrationsRange);
 
-		this.container
-			.selectAll('.monarch')
-			.data(source)
-				.enter()
+		source.sort((one, two) => (two.celebrations - one.celebrations));
+
+		const monarchs = this.container
+								.selectAll('g.monarch')
+								.data(source)
+									.enter()
+								.append('g')
+									.attr('class', 'monarch')
+									.attr("transform", (info) => `translate(${ this.scales.dayOfYear(info.birthday) }, 0)`);
+
+		monarchs
 			.append('circle')
-				.attr('class', (info) => `monarch ${ info.title }`)
-				.attr('cx', (info) => this.scales.dayOfYear(info.birthday))
-				.attr('cy', 0)
-				.attr("data-name", (info) => info.name)
-				.attr("data-cel", (info) => info.celebrations)
-				.attr("data-birthday", (info) => info.birthday)
+				.attr('class', (info) => info.title)
 				.attr('r', (info) => this.scales.celebrations(info.celebrations));
+
+		monarchs
+			.append('line')
+				.attr('class', 'axis')
+				.attr('y1', 10);
 	}
 
 	drawCelebrationDates(source) {

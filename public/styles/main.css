@@ -18,13 +18,24 @@ h1, h2, h3, h4 {
 }
 
 main {
-	height: 80vh;
+	height: 50vh;
 	width: 90vw;
 	margin: auto;
 }
 
 .title {
 	font-family: 'Abril Fatface', cursive;
+}
+
+.columns {
+	width: 90vw;
+	margin: auto;
+	display: flex;
+	flex-direction: row nowrap;
+}
+
+.columns .item {
+	flex-grow: 1;
 }
 
 .axis {
@@ -38,10 +49,10 @@ main {
 	fill-opacity: 0.3;
 }
 
-.queen {
+.monarch .queen {
 	fill: #E88A8A;
 }
 
-.king {
+.monarch .king {
 	fill: #D3AC2B;
 }
